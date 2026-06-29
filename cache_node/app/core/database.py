@@ -1,7 +1,8 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, DeclarativeBase
-from python.dotenv import load_dotenv
+from dotenv import load_dotenv
 import os
+
 load_dotenv()
 
 NODE_ID = os.getenv("NODE_ID","node1")
