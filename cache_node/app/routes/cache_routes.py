@@ -25,10 +25,10 @@ def get_quorum_manager():
     return quorum_manager, replication_service
 
 
-def get_replication_service():
-    """Dependency injection for replication service."""
-    from cache_node.app.main import replication_service
-    return replication_service
+def get_rebalancing_manager():
+    """Dependency injection for rebalancing manager."""
+    from cache_node.app.main import rebalancing_manager
+    return rebalancing_manager
 
 
 @router.get("/health")
@@ -118,3 +118,32 @@ async def delete_cache(
     quorum_manager.cleanup_operation(op_id)
     
     return {"status": "ok", "key": payload.key}
+
+
+@router.get("/rebalancing/status")
+def rebalancing_status(
+    rebalancing_manager=Depends(get_rebalancing_manager),
+) -> dict[str, object]:
+    """Get current rebalancing status."""
+    active_job_id = rebalancing_manager.get_active_job_id()
+    all_jobs = rebalancing_manager.get_all_jobs()
+    
+    return {
+        "has_active_job": rebalancing_manager.has_active_job(),
+        "active_job_id": active_job_id,
+        "all_jobs": all_jobs,
+    }
+
+
+@router.get("/rebalancing/job/{job_id}")
+def rebalancing_job_status(
+    job_id: str,
+    rebalancing_manager=Depends(get_rebalancing_manager),
+) -> dict[str, object]:
+    """Get status of a specific rebalancing job."""
+    status = rebalancing_manager.get_job_status(job_id)
+    
+    if status is None:
+        raise HTTPException(status_code=404, detail="job not found")
+    
+    return status
