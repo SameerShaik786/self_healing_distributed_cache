@@ -1,0 +1,65 @@
+version: "3.8"
+
+services:
+  node_a:
+    build: .
+    container_name: cache_node_a
+    environment:
+      NODE_ID: node_a
+    ports:
+      - "5001:5000"
+      - "50051:50051"
+    volumes:
+      - node_a_data:/app/data
+    networks:
+      - cache-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 5s
+      timeout: 3s
+      retries: 3
+
+  node_b:
+    build: .
+    container_name: cache_node_b
+    environment:
+      NODE_ID: node_b
+    ports:
+      - "5002:5000"
+      - "50052:50051"
+    volumes:
+      - node_b_data:/app/data
+    networks:
+      - cache-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 5s
+      timeout: 3s
+      retries: 3
+
+  node_c:
+    build: .
+    container_name: cache_node_c
+    environment:
+      NODE_ID: node_c
+    ports:
+      - "5003:5000"
+      - "50053:50051"
+    volumes:
+      - node_c_data:/app/data
+    networks:
+      - cache-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 5s
+      timeout: 3s
+      retries: 3
+
+volumes:
+  node_a_data:
+  node_b_data:
+  node_c_data:
+
+networks:
+  cache-network:
+    driver: bridge
