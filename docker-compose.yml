@@ -6,6 +6,7 @@ services:
     container_name: cache_node_a
     environment:
       NODE_ID: node_a
+      GRPC_PORT: 50051
     ports:
       - "5001:5000"
       - "50051:50051"
@@ -24,6 +25,7 @@ services:
     container_name: cache_node_b
     environment:
       NODE_ID: node_b
+      GRPC_PORT: 50051
     ports:
       - "5002:5000"
       - "50052:50051"
@@ -31,6 +33,8 @@ services:
       - node_b_data:/app/data
     networks:
       - cache-network
+    depends_on:
+      - node_a
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
       interval: 5s
@@ -42,6 +46,7 @@ services:
     container_name: cache_node_c
     environment:
       NODE_ID: node_c
+      GRPC_PORT: 50051
     ports:
       - "5003:5000"
       - "50053:50051"
@@ -49,6 +54,8 @@ services:
       - node_c_data:/app/data
     networks:
       - cache-network
+    depends_on:
+      - node_a
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
       interval: 5s
