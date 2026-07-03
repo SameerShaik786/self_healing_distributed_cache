@@ -7,6 +7,7 @@ import grpc
 
 from cache_node.protos import cache_pb2, cache_pb2_grpc
 from cache_node.app.services.storage_service import StorageEngine
+from cache_node.app.services.version_vector import VersionVector
 
 logger = logging.getLogger(__name__)
 
@@ -26,19 +27,28 @@ class CacheServicer(cache_pb2_grpc.CacheServiceServicer):
 
     def Get(self, request, context):
         """Get a value from the cache."""
-        value = self.storage.get(request.key)
-        if value is None:
-            return cache_pb2.GetResponse(found=False, value="", version=0)
-        return cache_pb2.GetResponse(found=True, value=value, version=1)
+        result = self.storage.get(request.key)
+        if result is None:
+            return cache_pb2.GetResponse(found=False, value="", timestamp=0, node_id="")
+        
+        value, version = result
+        return cache_pb2.GetResponse(
+            found=True,
+            value=value,
+            timestamp=version.timestamp,
+            node_id=version.node_id,
+        )
 
     def Put(self, request, context):
         """Put a value into the cache."""
-        success = self.storage.put(request.key, request.value)
-        return cache_pb2.PutResponse(success=success, version=request.version + 1)
+        version = VersionVector(request.timestamp, request.node_id)
+        success, final_version = self.storage.put(request.key, request.value, version)
+        return cache_pb2.PutResponse(success=success, timestamp=final_version.timestamp)
 
     def Delete(self, request, context):
         """Delete a key from the cache."""
-        success = self.storage.delete(request.key)
+        version = VersionVector(request.timestamp, request.node_id)
+        success = self.storage.delete(request.key, version)
         return cache_pb2.DeleteResponse(success=success)
 
 

@@ -10,5 +10,6 @@ class CacheEntry(Base):
     created_at = Column(DateTime, nullable=False)
     updated_at = Column(DateTime, nullable=False)
     expires_at = Column(DateTime, nullable=True)
-    version = Column(Integer,nullable = False, default=1)
+    version = Column(Integer, nullable=False, default=1)
+    node_id = Column(String, nullable=True)  # Track which node wrote this
     is_deleted = Column(Boolean, default=False)

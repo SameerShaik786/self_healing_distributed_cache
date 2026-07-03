@@ -24,7 +24,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0b\x63\x61\x63he.proto\x12\x05\x63\x61\x63he\"6\n\x10HeartbeatRequest\x12\x0f\n\x07node_id\x18\x01 \x01(\t\x12\x11\n\ttimestamp\x18\x02 \x01(\x03\"F\n\x11HeartbeatResponse\x12\x0f\n\x07node_id\x18\x01 \x01(\t\x12\r\n\x05\x61live\x18\x02 \x01(\x08\x12\x11\n\ttimestamp\x18\x03 \x01(\x03\"\x19\n\nGetRequest\x12\x0b\n\x03key\x18\x01 \x01(\t\"<\n\x0bGetResponse\x12\r\n\x05value\x18\x01 \x01(\t\x12\x0f\n\x07version\x18\x02 \x01(\x05\x12\r\n\x05\x66ound\x18\x03 \x01(\x08\"9\n\nPutRequest\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\x12\x0f\n\x07version\x18\x03 \x01(\x05\"/\n\x0bPutResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\x0f\n\x07version\x18\x02 \x01(\x05\"\x1c\n\rDeleteRequest\x12\x0b\n\x03key\x18\x01 \x01(\t\"!\n\x0e\x44\x65leteResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x32\xe1\x01\n\x0c\x43\x61\x63heService\x12>\n\tHeartbeat\x12\x17.cache.HeartbeatRequest\x1a\x18.cache.HeartbeatResponse\x12,\n\x03Get\x12\x11.cache.GetRequest\x1a\x12.cache.GetResponse\x12,\n\x03Put\x12\x11.cache.PutRequest\x1a\x12.cache.PutResponse\x12\x35\n\x06\x44\x65lete\x12\x14.cache.DeleteRequest\x1a\x15.cache.DeleteResponseb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0b\x63\x61\x63he.proto\x12\x05\x63\x61\x63he\"6\n\x10HeartbeatRequest\x12\x0f\n\x07node_id\x18\x01 \x01(\t\x12\x11\n\ttimestamp\x18\x02 \x01(\x03\"F\n\x11HeartbeatResponse\x12\x0f\n\x07node_id\x18\x01 \x01(\t\x12\r\n\x05\x61live\x18\x02 \x01(\x08\x12\x11\n\ttimestamp\x18\x03 \x01(\x03\"\x19\n\nGetRequest\x12\x0b\n\x03key\x18\x01 \x01(\t\"O\n\x0bGetResponse\x12\r\n\x05value\x18\x01 \x01(\t\x12\x11\n\ttimestamp\x18\x02 \x01(\x03\x12\x0f\n\x07node_id\x18\x03 \x01(\t\x12\r\n\x05\x66ound\x18\x04 \x01(\x08\"[\n\nPutRequest\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\x12\x11\n\ttimestamp\x18\x03 \x01(\x03\x12\x0f\n\x07node_id\x18\x04 \x01(\t\x12\r\n\x05op_id\x18\x05 \x01(\t\"1\n\x0bPutResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\x11\n\ttimestamp\x18\x02 \x01(\x03\"O\n\rDeleteRequest\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x11\n\ttimestamp\x18\x02 \x01(\x03\x12\x0f\n\x07node_id\x18\x03 \x01(\t\x12\r\n\x05op_id\x18\x04 \x01(\t\"!\n\x0e\x44\x65leteResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x32\xe1\x01\n\x0c\x43\x61\x63heService\x12>\n\tHeartbeat\x12\x17.cache.HeartbeatRequest\x1a\x18.cache.HeartbeatResponse\x12,\n\x03Get\x12\x11.cache.GetRequest\x1a\x12.cache.GetResponse\x12,\n\x03Put\x12\x11.cache.PutRequest\x1a\x12.cache.PutResponse\x12\x35\n\x06\x44\x65lete\x12\x14.cache.DeleteRequest\x1a\x15.cache.DeleteResponseb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -38,15 +38,15 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_GETREQUEST']._serialized_start=150
   _globals['_GETREQUEST']._serialized_end=175
   _globals['_GETRESPONSE']._serialized_start=177
-  _globals['_GETRESPONSE']._serialized_end=237
-  _globals['_PUTREQUEST']._serialized_start=239
-  _globals['_PUTREQUEST']._serialized_end=296
-  _globals['_PUTRESPONSE']._serialized_start=298
-  _globals['_PUTRESPONSE']._serialized_end=345
-  _globals['_DELETEREQUEST']._serialized_start=347
-  _globals['_DELETEREQUEST']._serialized_end=375
-  _globals['_DELETERESPONSE']._serialized_start=377
-  _globals['_DELETERESPONSE']._serialized_end=410
-  _globals['_CACHESERVICE']._serialized_start=413
-  _globals['_CACHESERVICE']._serialized_end=638
+  _globals['_GETRESPONSE']._serialized_end=256
+  _globals['_PUTREQUEST']._serialized_start=258
+  _globals['_PUTREQUEST']._serialized_end=349
+  _globals['_PUTRESPONSE']._serialized_start=351
+  _globals['_PUTRESPONSE']._serialized_end=400
+  _globals['_DELETEREQUEST']._serialized_start=402
+  _globals['_DELETEREQUEST']._serialized_end=481
+  _globals['_DELETERESPONSE']._serialized_start=483
+  _globals['_DELETERESPONSE']._serialized_end=516
+  _globals['_CACHESERVICE']._serialized_start=519
+  _globals['_CACHESERVICE']._serialized_end=744
 # @@protoc_insertion_point(module_scope)

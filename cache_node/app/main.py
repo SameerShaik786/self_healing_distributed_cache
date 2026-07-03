@@ -11,13 +11,15 @@ from cache_node.app.routes.cache_routes import router
 from cache_node.app.grpc_server import run_grpc_server
 from cache_node.app.services.node_registry import NodeRegistry
 from cache_node.app.services.replication_service import ReplicationService
+from cache_node.app.services.quorum_manager import QuorumManager
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 # Global instances
 registry = NodeRegistry()
-replication_service = ReplicationService(registry)
+quorum_manager = QuorumManager(os.getenv("NODE_ID", "node_default"), total_nodes=3)
+replication_service = ReplicationService(registry, quorum_manager)
 health_check_task = None
 
 
