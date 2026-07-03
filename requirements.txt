@@ -14,6 +14,11 @@ protobuf
 
 python-dotenv
 
+# Observability
+prometheus-client
+
+# Testing
 pytest
 pytest-asyncio
 httpx
+requests
